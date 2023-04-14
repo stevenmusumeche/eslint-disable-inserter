@@ -21,4 +21,5 @@ type ESLintMessage = {
 type Options = {
   dryRun: boolean
   addFixMe: boolean
+  fixMeMessage: string
 }

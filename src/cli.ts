@@ -18,6 +18,9 @@ const cli = meow(
     --add-fix-me, -f ${chalk.gray(
       `Add a ${chalk.yellow("// FIXME")} comment along with the eslint ignores`,
     )}
+    --fix-me-message, -m ${chalk.gray(
+      `Add an additional message to the ${chalk.yellow("// FIXME")} comment`,
+    )}
 `,
   {
     flags: {
@@ -28,6 +31,10 @@ const cli = meow(
       addFixMe: {
         type: "boolean",
         alias: "f",
+      },
+      fixMeMessage: {
+        type: "string",
+        alias: "m",
       },
     },
   },

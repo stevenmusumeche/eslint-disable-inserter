@@ -20,10 +20,12 @@ export default function prependRuleIdsAtLines({
   source,
   insertions,
   addFixMe,
+  fixMeMessage,
 }: {
   source: string
   insertions: RuleIdsByLine
   addFixMe: boolean
+  fixMeMessage: string
 }) {
   let lines = source.split("\n")
 
@@ -55,7 +57,7 @@ export default function prependRuleIdsAtLines({
         lines.splice(
           adjustedLineNumber(offset) - 1,
           0,
-          indentation + fixMeString,
+          indentation + fixMeString + fixMeMessage ? ` ${fixMeMessage}` : "",
         )
         offset++
       }
@@ -66,7 +68,11 @@ export default function prependRuleIdsAtLines({
       )
     } else {
       if (addFixMe && !isFixMe(lines[adjustedLineNumber(offset) - 1])) {
-        lines.splice(adjustedLineNumber(offset), 0, indentation + fixMeString)
+        lines.splice(
+          adjustedLineNumber(offset),
+          0,
+          indentation + fixMeString + fixMeMessage ? ` ${fixMeMessage}` : "",
+        )
         offset++
       }
       lines.splice(adjustedLineNumber(offset), 0, indentation + ignoreString)
